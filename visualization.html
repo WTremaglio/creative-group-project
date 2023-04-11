@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ant Colony Visualization</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div>
+        <video id="video" class="fullscreen-video" autoplay controls loop muted>
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="popup-form" class="popup">
+        <div class="popup-content">
+            <button id="close-popup" class="close-popup">&times;</button>
+            <form id="subscribe-form">
+                <h2>Subscribe to our newsletter</h2>
+                <input type="email" name="email" placeholder="Email" required />
+                <div class="checkbox-container">
+                    <input type="checkbox" name="subscribe" id="subscribe" required />
+                    <label for="subscribe">Yes! I would like to subscribe to receive news about the ant
+                        colonies!</label>
+                </div>
+                <button class="submit-button" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script defer>
+        // A function to initialize the video element with the video source file for the corresponding ant colony
+        function initVideo() {
+            const video = document.getElementById("video");
+            if (!video) return; // If the video element is not found, return early
+
+            const urlParams = new URLSearchParams(window.location.search); // Get the query parameters from the URL
+            const colonyNumber = urlParams.get("colony"); // Extract the colony number from the query parameters
+            video.setAttribute("src", `assets/visualizations/v${colonyNumber}.mp4`); // Set the video source with the corresponding ant colony video
+        }
+
+        // A function to close the popup form
+        function closeForm() {
+            const popupForm = document.getElementById("popup-form");
+            popupForm.style.display = "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () { // Wait for the DOM content to load before executing the script
+            initVideo(); // Call the initVideo function to initialize the video source
+
+            const closePopupButton = document.getElementById("close-popup");
+            closePopupButton.addEventListener("click", closeForm); // Add an event listener to the close button to close the popup form
+
+            const subscribeForm = document.getElementById("subscribe-form");
+            subscribeForm.addEventListener("submit", (event) => {
+                event.preventDefault(); // Prevent the default form submission behavior
+                closeForm(); // Call the closeForm function to close the popup form
+            });
+        });
+    </script>
+</body>
+
+</html>
