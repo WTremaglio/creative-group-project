@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const listItem = `
           <li>
             <div class="colony-name"><strong>Ant Colony ${colony.id}</strong></div>
-            <div class="colony-details">${colony.coords.join(", ")}</div>
             <div class="colony-button"><a href="visualization.html?colony=${colony.id}"><button>View Visualization</button></a></div>
           </li>
         `;
